@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AN LIFE PHOTOGRAPHY</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></noscript>
+    
+    <!-- Inline critical CSS -->
     <style>
         @font-face {
             font-family: 'SF Pro Display';
             src: local(-apple-system);
+            font-display: swap;
         }
         @font-face {
             font-family: 'SF Pro Text';
             src: local(-apple-system);
+            font-display: swap;
         }
         .font-sf-pro-display {
             font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -21,7 +26,19 @@
         .font-sf-pro-text {
             font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
-        /* Apple-like animations */
+        /* Critical path styles */
+        body { 
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.5;
+            color: #111;
+            background-color: #fff;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -31,11 +48,9 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Smooth scroll behavior */
         html {
             scroll-behavior: smooth;
         }
-        /* Apple-like button hover effect */
         .apple-button {
             transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.559);
@@ -45,14 +60,13 @@
             background: rgba(255, 255, 255, 0.9);
             transform: scale(1.02);
         }
-        /* Service icon animation */
         .service-icon {
             transition: transform 0.3s ease;
         }
         .service-icon:hover {
             transform: scale(1.1);
         }
-        /* Gallery styles */
+        /* Gallery optimized styles */
         .gallery-grid {
             display: grid;
             grid-gap: 1rem;
@@ -74,41 +88,104 @@
             transform: scale(1.03);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        .gallery-placeholder {
-            color: #86868b;
-            font-size: 1.2rem;
-            text-align: center;
-            padding: 1rem;
-        }
-        /* For taller images */
-        .tall {
-            grid-row: span 2 / auto;
-        }
-        /* For wider images */
-        .wide {
-            grid-column: span 2 / auto;
-        }
-        /* Logo styles */
+        .tall { grid-row: span 2 / auto; }
+        .wide { grid-column: span 2 / auto; }
         .logo-img {
             height: 30px;
             width: auto;
             margin-right: 5px;
         }
+        
+        /* Tailwind-like utility classes (minimal subset) */
+        .bg-white { background-color: white; }
+        .bg-black { background-color: black; }
+        .text-white { color: white; }
+        .text-gray-600 { color: #4b5563; }
+        .text-gray-900 { color: #111827; }
+        .text-center { text-align: center; }
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .fixed { position: fixed; }
+        .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+        .flex { display: flex; }
+        .grid { display: grid; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-between: space-between; }
+        .w-full { width: 100%; }
+        .h-full { height: 100%; }
+        .h-screen { height: 100vh; }
+        .z-10 { z-index: 10; }
+        .z-50 { z-index: 50; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-12 { margin-bottom: 3rem; }
+        .mb-16 { margin-bottom: 4rem; }
+        .mt-8 { margin-top: 2rem; }
+        .mt-12 { margin-top: 3rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .bg-gray-900 { background-color: #111827; }
+        .rounded-full { border-radius: 9999px; }
+        .rounded-2xl { border-radius: 1rem; }
+        .object-cover { object-fit: cover; }
+        .opacity-70 { opacity: 0.7; }
+        .text-4xl { font-size: 2.25rem; }
+        .text-6xl { font-size: 3.75rem; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .backdrop-blur-xl { backdrop-filter: blur(24px); }
+        
+        /* Responsive utilities */
+        @media (min-width: 640px) {
+            .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        }
+        @media (min-width: 768px) {
+            .md\:text-7xl { font-size: 4.5rem; }
+            .md\:text-2xl { font-size: 1.5rem; }
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .md\:flex { display: flex; }
+            .md\:hidden { display: none; }
+        }
+        @media (min-width: 1024px) {
+            .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+            .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+        
+        /* Mobile navigation */
+        .mobile-menu {
+            display: none;
+        }
+        @media (max-width: 767px) {
+            .mobile-menu-button {
+                display: block;
+            }
+            .desktop-menu {
+                display: none;
+            }
+            .mobile-menu.active {
+                display: block;
+                position: fixed;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background-color: white;
+                padding: 1rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            }
+            .mobile-menu a {
+                display: block;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid #e5e7eb;
+            }
+        }
     </style>
-    <script>
-        // Intersection Observer for fade-in animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
-        });
-    </script>
+    
+    <!-- Deferred Tailwind CSS -->
+    <script defer src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white font-sf-pro-text">
     <!-- Navigation -->
@@ -116,13 +193,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex-shrink-0 flex items-center">
-                    <!-- Logo Image -->
-                    <img src="images\anlife.png" alt="AN LIFE PHOTOGRAPHY Logo" class="logo-img">
+                    <!-- Logo Image (with width and height) -->
+                    <img src="images/anlife.png" alt="AN LIFE PHOTOGRAPHY Logo" class="logo-img" width="30" height="30">
                     <a href="#" class="text-gray-90 font-sf-pro-display font-semibold text-xl tracking-tight">
                         AN LIFE PHOTOGRAPHY
                     </a>
                 </div>
-                <div class="hidden md:flex items-center space-x-10">
+                <div class="hidden md:flex items-center space-x-10 desktop-menu">
                     <a href="#home" class="text-sm text-gray-600 hover:text-gray-900">Home</a>
                     <a href="#portfolio" class="text-sm text-gray-600 hover:text-gray-900">Portfolio</a>
                     <a href="#gallery" class="text-sm text-gray-600 hover:text-gray-900">Gallery</a>
@@ -130,16 +207,26 @@
                     <a href="#about" class="text-sm text-gray-600 hover:text-gray-900">About</a>
                     <a href="#contact" class="text-sm text-gray-600 hover:text-gray-900">Contact</a>
                 </div>
+                <button class="md:hidden mobile-menu-button">
+                    <i class="fas fa-bars text-gray-600"></i>
+                </button>
             </div>
+        </div>
+        <div class="mobile-menu">
+            <a href="#home" class="text-gray-600 hover:text-gray-900">Home</a>
+            <a href="#portfolio" class="text-gray-600 hover:text-gray-900">Portfolio</a>
+            <a href="#gallery" class="text-gray-600 hover:text-gray-900">Gallery</a>
+            <a href="#services" class="text-gray-600 hover:text-gray-900">Services</a>
+            <a href="#about" class="text-gray-600 hover:text-gray-900">About</a>
+            <a href="#contact" class="text-gray-600 hover:text-gray-900">Contact</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="relative h-screen flex items-center justify-center bg-black">
         <div class="absolute inset-0">
-            <img src="https://images.pexels.com/photos/2788488/pexels-photo-2788488.jpeg" 
-                 alt="Hero Image" 
-                 class="w-full h-full object-cover opacity-70">
+            <!-- Hero image with loading optimization -->
+            <img src="https://images.pexels.com/photos/2788488/pexels-photo-2788488.jpeg" alt="Hero Image" class="w-full h-full object-cover opacity-70" loading="eager" width="1200" height="800">
         </div>
         <div class="relative text-center text-white z-10">
             <h1 class="font-sf-pro-display text-6xl md:text-7xl font-bold mb-4">
@@ -167,25 +254,28 @@
                 <div class="group relative overflow-hidden rounded-2xl shadow-lg transform hover:scale-[1.02] transition-all duration-500">
                     <img src="images\0Q6A8324.jpeg" 
                          alt="Wedding Photography" 
-                         class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-700">
+                         class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-700"
+                         loading="lazy" width="400" height="300">
                     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
                         <h3 class="text-white text-2xl font-sf-pro-display">Weddings</h3>
                     </div>
                 </div>
                 <!-- Events -->
-                <div class="group relative overflow-hidden rounded-2xl shadow-lg transform hover:scale-[1.02] transition-all duration-500" style="transition-delay: 0.1s;">
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg transform hover:scale-[1.02] transition-all duration-500">
                     <img src="images\3K3A8649.jpeg" 
                          alt="Event Photography" 
-                         class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-700">
+                         class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-700"
+                         loading="lazy" width="400" height="300">
                     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
                         <h3 class="text-white text-2xl font-sf-pro-display">Events</h3>
                     </div>
                 </div>
                 <!-- Corporate -->
-                <div class="group relative overflow-hidden rounded-2xl shadow-lg transform hover:scale-[1.02] transition-all duration-500" style="transition-delay: 0.2s;">
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg transform hover:scale-[1.02] transition-all duration-500">
                     <img src="images\tasni1.png" 
                          alt="Corporate Photography" 
-                         class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-700">
+                         class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-700"
+                         loading="lazy" width="400" height="300">
                     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
                         <h3 class="text-white text-2xl font-sf-pro-display">Corporate</h3>
                     </div>
@@ -194,52 +284,48 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
+    <!-- Gallery Section (Lazy Loaded) -->
     <section id="gallery" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-sf-pro-display font-semibold text-center mb-16">Our Gallery</h2>
             <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">
-                A collection of our finest moments captured with passion and precision. Coming soon.
+                A collection of our finest moments captured with passion and precision.
             </p>
             
             <div class="gallery-grid fade-in">
-                <!-- Wedding Photos -->
+                <!-- Gallery Images with lazy loading -->
                 <div class="gallery-item tall">
-                    <img src="gallery\3K3A9089.jpeg" alt="Bride and groom portrait" class="gallery-img">
+                    <img src="gallery\3K3A9089.jpeg" alt="Bride and groom portrait" class="gallery-img" loading="lazy" width="300" height="600">
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="gallery\3K3A8649.jpeg" alt="Wedding ceremony in Kerala" class="gallery-img">
+                    <img src="gallery\3K3A8649.jpeg" alt="Wedding ceremony in Kerala" class="gallery-img" loading="lazy" width="300" height="300">
                 </div>
                 
-                <!-- Event Photos -->
                 <div class="gallery-item wide">
-                    <img src="gallery\1679061582428.JPG" alt="Corporate event coverage" class="gallery-img">
+                    <img src="gallery\1679061582428.JPG" alt="Corporate event coverage" class="gallery-img" loading="lazy" width="600" height="300">
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="gallery\0Q6A8310.jpeg" alt="Birthday party photography" class="gallery-img">
+                    <img src="gallery\0Q6A8310.jpeg" alt="Birthday party photography" class="gallery-img" loading="lazy" width="300" height="300">
                 </div>
                 
-                <!-- Portrait Photos -->
                 <div class="gallery-item tall">
-                    <img src="gallery\4F2A8727.jpeg" alt="Family portrait session" class="gallery-img">
+                    <img src="gallery\4F2A8727.jpeg" alt="Family portrait session" class="gallery-img" loading="lazy" width="300" height="600">
                 </div>
                 
-                <!-- More images... -->
                 <div class="gallery-item tall">
-                    <img src="gallery\0Q6A8329.jpeg" alt="Family portrait session" class="gallery-img">
+                    <img src="gallery\0Q6A8329.jpeg" alt="Family portrait session" class="gallery-img" loading="lazy" width="300" height="600">
                 </div>
 
                 <div class="gallery-item wide">
-                    <img src="gallery\tasni1.png" alt="Bride and groom portrait" class="gallery-img">
+                    <img src="gallery\tasni1.png" alt="Bride and groom portrait" class="gallery-img" loading="lazy" width="600" height="300">
                 </div>
-                
             </div>
             
-            <div class="text-center mt-12 fade-in" style="transition-delay: 0.3s;">
+            <div class="text-center mt-12 fade-in">
                 <a href="#contact" class="inline-block bg-gray-900 text-white px-8 py-3 rounded-full 
-                                        transform hover:scale-[1.02] transition-all duration-300">
+                                      transform hover:scale-[1.02] transition-all duration-300">
                     Book Your Session
                 </a>
             </div>
@@ -251,7 +337,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-sf-pro-display font-semibold text-center mb-16">Our Services</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <!-- Wedding Photography -->
+                <!-- Services with icon font (no image loading) -->
                 <div class="text-center fade-in">
                     <div class="service-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 mb-6">
                         <i class="fas fa-ring text-4xl text-gray-900"></i>
@@ -259,16 +345,14 @@
                     <h3 class="text-xl font-sf-pro-display font-semibold mb-4">Wedding Photography</h3>
                     <p class="text-gray-600">Capturing your special moments with elegance and style.</p>
                 </div>
-                <!-- Event Coverage -->
-                <div class="text-center fade-in" style="transition-delay: 0.2s;">
+                <div class="text-center fade-in">
                     <div class="service-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 mb-6">
                         <i class="fas fa-calendar-alt text-4xl text-gray-900"></i>
                     </div>
                     <h3 class="text-xl font-sf-pro-display font-semibold mb-4">Event Coverage</h3>
                     <p class="text-gray-600">Professional coverage for all your special occasions.</p>
                 </div>
-                <!-- Corporate Photography -->
-                <div class="text-center fade-in" style="transition-delay: 0.4s;">
+                <div class="text-center fade-in">
                     <div class="service-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 mb-6">
                         <i class="fas fa-building text-4xl text-gray-900"></i>
                     </div>
@@ -286,7 +370,8 @@
                 <div class="relative h-[600px]">
                     <img src="images\2D5A1899.JPG" 
                          alt="About Us" 
-                         class="w-full h-full object-cover rounded-2xl">
+                         class="w-full h-full object-cover rounded-2xl"
+                         loading="lazy" width="600" height="800">
                 </div>
                 <div>
                     <h2 class="text-4xl font-sf-pro-display font-semibold mb-8">About Us</h2>
@@ -363,7 +448,7 @@
     <footer class="bg-gray-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="flex justify-center items-center mb-4">
-                <img src="images\20221230_184036_0001.png" alt="AN LIFE PHOTOGRAPHY Logo" class="h-20 mr-6">
+                <img src="images/20221230_184036_0001.png" alt="AN LIFE PHOTOGRAPHY Logo" class="h-20 mr-6" width="80" height="80">
                 <h3 class="font-sf-pro-display text-2xl">AN LIFE PHOTOGRAPHY</h3>
             </div>
             <p class="text-gray-400 mb-6">Capturing Life's Beautiful Moments</p>
@@ -381,5 +466,60 @@
             <p class="text-sm text-gray-500">&copy; 2024 AN LIFE PHOTOGRAPHY. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Performance-optimized JS -->
+    <script>
+        // Deferred loading of non-critical JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                });
+            }
+            
+            // Intersection Observer for animations - only initialize when needed
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            if (fadeElements.length > 0) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            // Unobserve after animation to improve performance
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                fadeElements.forEach((el) => observer.observe(el));
+            }
+            
+            // Progressive image loading
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            if ('loading' in HTMLImageElement.prototype) {
+                // Browser supports native lazy loading
+                console.log('Browser supports native lazy loading');
+            } else {
+                // Fallback for browsers that don't support lazy loading
+                const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(img => {
+                    lazyImageObserver.observe(img);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
